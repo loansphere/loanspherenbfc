@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Loan Application</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="loan-container">
+
+    <div class="loan-form">
+
+        <p class="form-title">
+        Enter borrower details to evaluate loan eligibility
+        </p>
+
+        <form method="POST">
+
+            <input type="text"
+            name="name"
+            placeholder="Enter customer name"
+            required>
+
+            <select name="loan_type" required>
+
+                <option value="" disabled selected>
+                Select Loan Type
+                </option>
+
+                <option value="Personal Loan">
+                Personal Loan
+                </option>
+
+                <option value="Housing Loan">
+                Housing Loan
+                </option>
+
+            </select>
+
+            <input type="number"
+            name="credit_score"
+            placeholder="Enter credit score"
+            required>
+
+            <input type="number"
+            name="income"
+            placeholder="Enter monthly income"
+            required>
+
+            <input type="number"
+            name="loan_amount"
+            placeholder="Enter loan amount"
+            required>
+
+            <input type="number"
+            name="tenure"
+            placeholder="Enter loan tenure (months)"
+            required>
+
+            <button type="submit">
+            Evaluate Loan Risk
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

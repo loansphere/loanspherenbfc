@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>🌐 LoanSphere Finance Dashboard</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>   
+</head>
+
+
+<body>
+
+<div class="nav-bar">
+
+<div class="logo-box">
+    <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
+</div>
+
+<div class="nav-links">
+<a href="/dashboard">Dashboard</a>
+<a href="/loan">Evaluate Loan</a>
+<a href="/logout">Logout</a>
+</div>
+
+</div>
+
+
+
+<div class="dashboard-container">
+
+<h1>LoanSphere Credit Risk Dashboard</h1>
+
+<p class="dashboard-subtitle">NBFC Loan Risk Monitoring System</p>
+
+<hr>
+
+
+<div class="card-container">
+
+<div class="dashboard-card total-card">
+<h3>📊 Total Loans</h3>
+<p>{{ total_loans }}</p>
+</div>
+
+<div class="dashboard-card low-card">
+<h3>🟢 Low Risk</h3>
+<p>{{ low_risk }}</p>
+</div>
+
+<div class="dashboard-card medium-card">
+<h3>🟡 Medium Risk</h3>
+<p>{{ medium_risk }}</p>
+</div>
+
+<div class="dashboard-card high-card">
+<h3>🔴 High Risk</h3>
+<p>{{ high_risk }}</p>
+</div>
+
+</div>
+
+<div class="action-buttons">
+
+<a href="/loan">
+<button class="btn-blue">Evaluate New Loan</button>
+</a>
+<a href="/export">
+<button class="btn-green">Export to Excel</button>
+</a>
+</div>
+
+<h2>Loan Portfolio</h2>
+
+<input type="text" placeholder="Search Customer..." class="search-bar">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Name</th>
+<th>Credit Score</th>
+<th>Risk Level</th>
+<th>EMI</th>
+<th>Decision</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for loan in loans %}
+
+<tr>
+
+<td>{{ loan.name }}</td>
+
+<td>{{ loan.credit_score }}</td>
+
+<td>{{ loan.risk }}</td>
+
+<td>₹ {{ loan.emi }}</td>
+
+<td>{{ loan.decision }}</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+<div class="chart-container">
+
+<h2>Loan Risk Distribution</h2>
+
+<canvas id="riskChart"></canvas>
+
+</div>
+
+</div>
+
+<script>
+
+const ctx = document.getElementById('riskChart');
+
+new Chart(ctx, {
+
+type: 'pie',
+
+data: {
+
+labels: ['Low Risk', 'Medium Risk', 'High Risk'],
+
+datasets: [{
+
+data: [{{ low_risk }}, {{ medium_risk }}, {{ high_risk }}],
+
+backgroundColor: [
+
+'#2ecc71',
+
+'#f1c40f',
+
+'#e74c3c'
+
+]
+
+}]
+
+},
+
+options: {
+
+plugins: {
+
+legend: {
+
+position: 'bottom'
+
+}
+
+}
+
+}
+
+});
+
+</script>
+
+</body>
+</html>

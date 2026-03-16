@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>LoanSphere Risk Evaluation</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<div class="result-container">
+
+<h1>Loan Risk Assessment</h1>
+
+<h2>Risk Category :
+<span class="risk-badge 
+{% if risk == 'Low Risk' %}
+low-risk
+{% elif risk == 'Medium Risk' %}
+medium-risk
+{% else %}
+high-risk
+{% endif %}
+">
+{{ risk }}
+</span>
+</h2>
+
+<div class="emi-box">
+<h3>Monthly EMI</h3>
+<p>₹ {{ emi }}</p>
+</div>
+
+<canvas id="riskChart" width="260" height="260"></canvas>
+
+<div class="analysis-box">
+
+<h3>Risk Assessment Details</h3>
+
+<div class="score-box">
+<p>Credit Score</p>
+<span>{{ credit_score }}</span>
+</div>
+
+<ul class="analysis-list">
+
+<li>Credit score analyzed to evaluate borrower creditworthiness.</li>
+
+<li>Loan repayment capacity assessed based on monthly income.</li>
+
+<li>Risk category generated automatically by LoanSphere.</li>
+
+</ul>
+
+</div>
+
+
+<a href="/dashboard">
+
+<button class="btn-blue">Back to Dashboard</button>
+
+</a>
+
+</div>
+
+<script>
+
+let riskValue = 30;  // default for Low Risk
+
+if ("{{ risk }}" == "Medium Risk") {
+    riskValue = 60;
+}
+
+if ("{{ risk }}" == "High Risk") {
+    riskValue = 90;
+}
+
+const ctx = document.getElementById('riskChart');
+
+new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        datasets: [{
+            data: [riskValue, 100 - riskValue],
+            backgroundColor: [
+                "{{ '#2ecc71' if risk=='Low Risk' else '#f1c40f' if risk=='Medium Risk' else '#e74c3c' }}",
+                "#dcdde1"
+            ],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        circumference: 180,
+        rotation: 270,
+        cutout: "70%",
+        plugins: {
+            legend: {
+                display: false
+            }
+        }
+    }
+});
+
+</script>
+
+</body>
+
+</html>

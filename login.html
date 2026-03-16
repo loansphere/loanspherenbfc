@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>LoanSphere</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="login-page">
+
+<div class="login-logo">
+    <img src="{{ url_for('static', filename='logologin.png') }}" alt="LoanSphere Logo">
+</div>
+
+<!-- Logo -->
+<div class="login-card">
+
+<h2>Login</h2>
+
+<form method="POST">
+
+<input type="text" name="username" placeholder="Username" required>
+
+<input type="password" name="password" placeholder="Password" required>
+
+<button type="submit">Login</button>
+
+</form>
+
+<p class="signup-text">
+Don't have an account?
+<a href="/signup">Create Account</a>
+</p>
+
+</div>
+
+
+<!-- Platform Info -->
+<div class="platform-info">
+
+<h3>Why Choose LoanSphere</h3>
+
+<div class="loan-products">
+
+<div class="loan-card">
+
+<h4>🏠 Housing Loan</h4>
+
+<p>
+Affordable housing finance with interest rates starting from
+<b>8.5%</b>. Flexible repayment tenure up to <b>20 years</b>.
+</p>
+
+</div>
+
+<div class="loan-card">
+
+<h4>💳 Personal Loan</h4>
+
+<p>
+Quick personal loans for emergencies and lifestyle needs.
+Interest rates starting from <b>11%</b>.
+</p>
+
+</div>
+
+<div class="loan-card">
+
+<h4>📊 Smart Risk Analytics</h4>
+
+<p>
+LoanSphere evaluates borrower credit score, income,
+and repayment ability to generate smart lending decisions.
+</p>
+
+</div>
+
+</div>
+
+</div>
+<div class="footer">
+<p>© 2026 LoanSphere | NBFC Credit Risk Monitoring Platform</p>
+</div>
+</div>
+
+</body>
+</html>
